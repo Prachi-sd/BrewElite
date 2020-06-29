@@ -7,6 +7,7 @@ use App\Brewery;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Contracts\Support\Jsonable;
 
 class BeerController extends Controller
 {
@@ -39,6 +40,16 @@ class BeerController extends Controller
     {
         $id = Route::current()->parameter('id');
         return Beer::all()->where('brewery_id', $id);
+    }
+
+    /**
+     * Return a JSON respose Containing All The Beer Lables That Belongs to Provided Brweery id.
+     *
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function getBeersPaginate()
+    {
+          return Beer::paginate(2);
     }
 
     /**

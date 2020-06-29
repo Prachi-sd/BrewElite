@@ -35,5 +35,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/getbeerlables', 'BeerController@getBeers');
 Route::get('/getbeerlablesbybrewery/{id}', 'BeerController@getBeersByBrewery');
+Route::get('/getbeerspaginate', 'BeerController@getBeersPaginate');
 
 Route::get('/home', 'HomeController@index')->name('home');
