@@ -117,6 +117,8 @@ class BeerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $beer = Beer::find($id);
+        $beer->delete();
+        return redirect('/home')->with('success', 'Beer Label Deleted Successfully !!');
     }
 }

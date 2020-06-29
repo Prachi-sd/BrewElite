@@ -91,6 +91,9 @@ class BreweryController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $brewery = Brewery::find($id);
+      $brewery->beers()->delete();
+      $brewery->delete();
+      return redirect('/home')->with('success', 'Brewery An All The Label It Owned Deleted Successfully !!');
     }
 }

@@ -9,7 +9,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Total Breweries</h5>
-                                    <span class="h2 font-weight-bold mb-0">0</span>
+                                    <span class="h2 font-weight-bold mb-0">{{ $breweries->count() }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-success text-white rounded-circle shadow">
@@ -26,7 +26,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Total Beer Lables</h5>
-                                    <span class="h2 font-weight-bold mb-0">0</span>
+                                    <span class="h2 font-weight-bold mb-0">{{ $beers->count() }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-info text-white rounded-circle shadow">

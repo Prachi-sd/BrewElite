@@ -3,9 +3,22 @@
 @section('content')
     @include('layouts.headers.cards')
 
+
     <div class="container-fluid mt--7">
 
         <div class="row mt-5">
+
+          <div class="col-sm-12">
+            @if(session()->get('success'))
+              <div class="alert alert-success">
+                {{ session()->get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+          </div>
+
             <div class="col-xl-6 mb-6 mb-xl-0">
                 <div class="card shadow">
                     <div class="card-header border-0">
@@ -22,21 +35,29 @@
                                 <tr>
                                     <th scope="col">name</th>
                                     <th scope="col">City</th>
-                                    <th scope="col">Total Lables</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        /argon/
-                                    </th>
-                                    <td>
-                                        4,569
-                                    </td>
-                                    <td>
-                                        340
-                                    </td>
-                                </tr>
+                              @foreach($breweries as $brewery)
+                              <tr>
+                                  <th scope="row">
+                                      {{$brewery->name}}
+                                  </th>
+                                  <td>
+                                      {{$brewery->city}}
+                                  </td>
+                                  <td>
+                                      <form action="{{ route('breweries.destroy', $brewery->id)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" onclick="return confirm('Are you sure? Deleting a Brewery Will Also Delete All The Labels That Belong To It.')" type="submit"><i class="fa fa-trash"></i></button>
+                                      </form>
+                                  </td>
+                              </tr>
+                              @endforeach
+
+
                             </tbody>
                         </table>
                     </div>
@@ -60,20 +81,31 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Brewery</th>
                                     <th scope="col">Rating</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
+
+                                @foreach($beers as $beer)
                                 <tr>
                                     <th scope="row">
-                                        /argon/
+                                      {{$beer->lable}}
                                     </th>
                                     <td>
-                                        4,569
+                                      {{$beer->brewery->name}}
                                     </td>
                                     <td>
-                                        340
+                                      {{$beer->rating}}
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('beers.destroy', $beer->id)}}" method="post">
+                                          @csrf
+                                          @method('DELETE')
+                                          <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit"><i class="fa fa-trash"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
