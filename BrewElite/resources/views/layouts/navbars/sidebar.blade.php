@@ -60,7 +60,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('breweries.create') }}">
                         <i class="fa fa-building text-blue" aria-hidden="true"></i> {{ __('Add New Brewery') }}
                     </a>
                 </li>
