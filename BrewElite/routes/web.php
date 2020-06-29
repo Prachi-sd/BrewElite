@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+Use App\Beer;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
   Route::resource('breweries', 'BreweryController');
+  Route::resource('beers', 'BeerController');
 });
 
 Auth::routes();
