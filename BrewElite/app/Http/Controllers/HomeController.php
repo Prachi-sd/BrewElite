@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Beer;
+use App\Brewery;
+
 class HomeController extends Controller
 {
     /**
@@ -21,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $breweries = Brewery::all();
+        $beers     = Beer::whereNotNull('lable')->with('brewery')->get();
+    
+        return view('dashboard',['breweries' => $breweries,'beers'=>$beers]);
     }
 }
