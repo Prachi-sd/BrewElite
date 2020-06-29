@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('beers.create') }}">
                         <i class="fa fa-tags text-blue" aria-hidden="true"></i> {{ __('Add New Lable') }}
                     </a>
                 </li>
