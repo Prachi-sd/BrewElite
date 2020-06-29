@@ -6,6 +6,7 @@ use App\Beer;
 use App\Brewery;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class BeerController extends Controller
 {
@@ -17,6 +18,27 @@ class BeerController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * Return a JSON respose Containing All The Beer Lables.
+     *
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function getBeers()
+    {
+        return Beer::all();
+    }
+
+    /**
+     * Return a JSON respose Containing All The Beer Lables That Belongs to Provided Brweery id.
+     *
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function getBeersByBrewery()
+    {
+        $id = Route::current()->parameter('id');
+        return Beer::all()->where('brewery_id', $id);
     }
 
     /**

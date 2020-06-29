@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Use App\Beer;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +16,11 @@ Use App\Beer;
 Route::get('/', function () {
     return view('welcome');
 });
-Auth::routes();
+
+// Authentication Routes... ( Not Using Auth::routes() beacuse we want limted Auth Functunality )
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -30,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::resource('beers', 'BeerController');
 });
 
-Auth::routes();
+Route::get('/getbeerlables', 'BeerController@getBeers');
+Route::get('/getbeerlablesbybrewery/{id}', 'BeerController@getBeersByBrewery');
 
 Route::get('/home', 'HomeController@index')->name('home');
