@@ -35,7 +35,8 @@
                                 <tr>
                                     <th scope="col">name</th>
                                     <th scope="col">City</th>
-                                    <th scope="col">Actions</th>
+                                    <th scope="col">Delete</th>
+                                    <th scope="col">Update</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,6 +54,9 @@
                                         @method('DELETE')
                                         <button class="btn btn-danger" onclick="return confirm('Are you sure? Deleting a Brewery Will Also Delete All The Labels That Belong To It.')" type="submit"><i class="fa fa-trash"></i></button>
                                       </form>
+                                  </td>
+                                  <td>
+                                        <a href="{{ route('breweries.edit',$brewery->id)}}" class="btn btn-primary"> <i class="fa fa-edit"></i></a>
                                   </td>
                               </tr>
                               @endforeach
@@ -81,7 +85,8 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Brewery</th>
                                     <th scope="col">Rating</th>
-                                    <th scope="col">Actions</th>
+                                    <th scope="col">Delete</th>
+                                    <th scope="col">Update</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,6 +107,13 @@
                                           @csrf
                                           @method('DELETE')
                                           <button class="btn btn-danger" onclick="return confirm('Are you sure?')" type="submit"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('beers.destroy', $beer->id)}}" method="post">
+                                          @csrf
+                                          @method('EDIT')
+                                          <button class="btn btn-primary" onclick="return confirm('Are you sure?')" type="submit"><i class="fa fa-edit"></i></button>
                                         </form>
                                     </td>
                                 </tr>
