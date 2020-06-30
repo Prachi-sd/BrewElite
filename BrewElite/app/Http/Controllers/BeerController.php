@@ -105,7 +105,9 @@ class BeerController extends Controller
      */
     public function edit($id)
     {
-        //
+      $beer = Beer::find($id);
+      $breweries = Brewery::all();
+      return view('beers.edit', compact('beer','breweries'));
     }
 
     /**
@@ -117,7 +119,19 @@ class BeerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+          'lable'=>'required',
+          'rating'=>'numeric|required|min:1|max:10',
+          'brewery_id.exists' => 'Not an existing Brewery'
+      ]);
+
+       $beer = Beer::find($id);
+       $beer->lable =  $request->get('lable');
+       $beer->rating  = $request->get('rating');
+       $beer->brewery_id  = $request->get('brewery_id');
+       $beer->save();
+
+        return redirect('/home')->with('success', 'Beer Lable Updated Successfully !!');
     }
 
     /**
