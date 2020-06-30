@@ -68,7 +68,8 @@ class BreweryController extends Controller
      */
     public function edit($id)
     {
-        //
+      $brewery = Brewery::find($id);
+      return view('breweries.edit', compact('brewery'));
     }
 
     /**
@@ -80,7 +81,17 @@ class BreweryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+           'name'=>'required',
+           'city'=>'required'
+       ]);
+
+       $brewery = Brewery::find($id);
+       $brewery->name =  $request->get('name');
+       $brewery->city  = $request->get('city');
+       $brewery->save();
+
+        return redirect('/home')->with('success', 'Brewery Updated Successfully !!');
     }
 
     /**
